@@ -1,0 +1,12 @@
+#开发环境
+server:
+  #ssl
+  port: 443
+  ssl:
+    enabled: true
+    key-store: classpath:ssl/wzxaugenstern.online.jks
+    key-store-password: 2167137570legacy
+    keyStoreType: JKS
+
+  servlet:
+    context-path:

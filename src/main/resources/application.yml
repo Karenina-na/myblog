@@ -1,10 +1,9 @@
-#端口
-server:
-  port: 80
-  servlet:
-    context-path:
-
 spring:
+  #环境
+  profiles:
+    active: dev
+
+
   #数据库地址
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
