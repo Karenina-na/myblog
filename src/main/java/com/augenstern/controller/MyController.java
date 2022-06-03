@@ -1,10 +1,7 @@
 package com.augenstern.controller;
 
 import com.augenstern.controller.util.ArticleChange;
-import com.augenstern.domain.ArticleBean;
-import com.augenstern.domain.Code;
-import com.augenstern.domain.ResultBean;
-import com.augenstern.domain.User;
+import com.augenstern.domain.*;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.MyService;
 import org.springframework.stereotype.Controller;
@@ -75,6 +72,21 @@ public class MyController {
             return new ResultBean(true, Code.GET_OK);
         } else {
             return new ResultBean(false, Code.GET_ERR, "用户名密码错误");
+        }
+    }
+
+    /**
+     * 更改个人信息
+     */
+    @PutMapping("/About")
+    @ResponseBody
+    public ResultBean UpdateAboutMe(@RequestBody AboutMe aboutMe){
+        boolean result = myService.UpdateAboutMe(aboutMe);
+        if (result){
+            return new ResultBean(true,Code.UPDATE_OK);
+        }
+        else{
+            return new ResultBean(false,Code.UPDATE_ERR,"更改失败");
         }
     }
 }

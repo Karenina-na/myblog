@@ -13,6 +13,7 @@ WEB
 
     MyBlog/about                GET     必要数据
 
+
 前端接口:
     resp.data.data  后端数据
     resp.data.code  状态码
@@ -44,5 +45,13 @@ ROOT
             "author": "作者",
             "messages": "内容",
             "tags": [标签]
-}
+    }
+
+
+    /Myblog/rootManager/about       PUT 改必要数据
+    {
+        "author":"作者",
+        "introduce":"介绍",
+        "notice":"公告"
+    }
 

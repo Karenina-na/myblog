@@ -134,4 +134,17 @@ public class MyblogBootServiceTests {
         boolean root = myService.SelectRoot("123", "123");
         System.out.println(root);
     }
+
+    /**
+     * 修改个人信息
+     */
+    @Test
+    public void updateAboutMeTest(){
+        AboutMe aboutMe = new AboutMe();
+        aboutMe.setAuthor("a");
+        aboutMe.setIntroduce("b");
+        aboutMe.setNotice("c");
+        myService.UpdateAboutMe(aboutMe);
+        System.out.println(articleService.SelectAboutMe());
+    }
 }

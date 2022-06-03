@@ -166,4 +166,17 @@ public class MyblogBootDaoTests {
         List<User> users = myDao.selectRoot();
         System.out.println(users);
     }
+
+    /**
+     * 修改个人信息
+     */
+    @Test
+    public void updateAboutMeTest(){
+        AboutMe aboutMe = new AboutMe();
+        aboutMe.setAuthor("aaa");
+        aboutMe.setIntroduce("bbb");
+        aboutMe.setNotice("ccc");
+        myDao.updateAboutMe(aboutMe);
+        System.out.println(articleDao.selectAboutMe());
+    }
 }

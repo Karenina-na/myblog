@@ -2,6 +2,7 @@ package com.augenstern.service.impl;
 
 import com.augenstern.dao.ArticleDao;
 import com.augenstern.dao.MyDao;
+import com.augenstern.domain.AboutMe;
 import com.augenstern.domain.ArticleBean;
 import com.augenstern.domain.Code;
 import com.augenstern.domain.User;
@@ -100,5 +101,11 @@ public class MyServiceImpl implements MyService {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean UpdateAboutMe(AboutMe aboutMe) {
+        myDao.updateAboutMe(aboutMe);
+        return true;
     }
 }

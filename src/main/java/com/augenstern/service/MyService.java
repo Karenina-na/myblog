@@ -1,5 +1,6 @@
 package com.augenstern.service;
 
+import com.augenstern.domain.AboutMe;
 import com.augenstern.domain.ArticleBean;
 import com.augenstern.exception.SystemException;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,15 @@ public interface MyService {
 
     /**
      * 查询root账号
+     * @return true为存在 false不存在
      */
     @Transactional(timeout = 5, rollbackFor = Exception.class, readOnly = true)
    boolean SelectRoot(String username,String password);
+
+    /**
+     * 更改个人信息
+     * @return true为成功 false失败
+     */
+    @Transactional(timeout = 5, rollbackFor = Exception.class)
+    boolean UpdateAboutMe(AboutMe aboutMe);
 }

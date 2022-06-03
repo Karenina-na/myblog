@@ -1,5 +1,6 @@
 package com.augenstern.dao;
 
+import com.augenstern.domain.AboutMe;
 import com.augenstern.domain.ArticleBean;
 import com.augenstern.domain.User;
 import org.apache.ibatis.annotations.*;
@@ -48,4 +49,9 @@ public interface MyDao {
     @Select("select * from User")
     @Options(useCache = false)
     List<User> selectRoot();
+
+    /**
+     * 更改个人信息
+     */
+    void updateAboutMe(AboutMe aboutMe);
 }
