@@ -1,9 +1,15 @@
 #端口
 server:
   port: 80
+  servlet:
+    context-path: /Myblog
 
-#数据库地址
 spring:
+  #前端路径问题
+  mvc:
+    static-path-pattern: /**
+
+  #数据库地址
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
@@ -16,3 +22,16 @@ spring:
     database: 0
     port: 6379
     connect-timeout: 5000
+
+#日志
+logging:
+  level:
+    java: off
+    javax: off
+    io: off
+    sun: off
+    _org: off
+    reactor: off
+    org.apache: off
+    org.springframework: off
+    org.mybatis: off

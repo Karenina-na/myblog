@@ -24,7 +24,7 @@ public class MybatisConfig {
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
-        factory.setTypeAliasesPackage("com.Augenstern.domain");
+        factory.setTypeAliasesPackage("com.augenstern.domain");
 
         PageInterceptor pageInterceptor = new PageInterceptor();        //分页插件
         Properties properties = new Properties();
