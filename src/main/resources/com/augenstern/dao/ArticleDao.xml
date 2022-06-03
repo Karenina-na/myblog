@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.augenstern.dao.ArticleDao">
+
+    <cache-ref namespace="com.augenstern.dao.Cache"/>
+
+    <!--子查询tags对象封装-->
+    <resultMap id="tagFind" type="com.augenstern.domain.ArticleBean">
+        <result column="id" property="id"/>
+        <result column="date" property="date"/>
+        <result column="author" property="author"/>
+        <result column="title" property="title"/>
+        <result column="messages" property="messages"/>
+        <collection property="tags" column="id" ofType="java.util.List"
+                    select="select_tags_by_ArtMapTag"/>
+    </resultMap>
+
+    <select id="select_tags_by_ArtMapTag" resultType="java.lang.String">
+        select Tag.tag from Tag,ArtMapTag
+        where ArtMapTag.t_id=Tag.id and ArtMapTag.a_id=#{id}
+        group by Tag.tag
+    </select>
+</mapper>

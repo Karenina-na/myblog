@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.augenstern.dao.MyDao">
+
+    <cache-ref namespace="com.augenstern.dao.Cache"/>
+
+    <!--增加文章与标签映射-->
+    <insert id="addTags" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into ArtMapTag(id, a_id, t_id)
+        VALUES
+        <foreach collection="tags" item="tag" separator=",">
+            (null,
+            #{id},
+            #{tag})
+        </foreach>
+    </insert>
+
+    <!--改-->
+    <update id="updateArticle">
+        update Article
+        <set>
+            <if test="date!=null and date!=''">
+                date=#{date},
+            </if>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="author!=null and author!=''">
+                author=#{author},
+            </if>
+            <if test="messages!=null and messages!=''">
+                messages=#{messages},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+</mapper>

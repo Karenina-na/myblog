@@ -9,6 +9,15 @@ public class AboutMe implements Serializable {
 
     private String author;
 
+    @Override
+    public String toString() {
+        return "AboutMe{" +
+                "author='" + author + '\'' +
+                ", introduce='" + introduce + '\'' +
+                ", notice='" + notice + '\'' +
+                '}';
+    }
+
     private String introduce;
 
     private String notice;
