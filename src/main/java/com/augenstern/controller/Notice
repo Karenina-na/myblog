@@ -1,0 +1,11 @@
+ProjectExceptionAdvice      全局异常处理器
+
+ArticleController           文章页面处理器
+
+AllProjectInterceptor       全局拦截器
+
+IdChange    id地址加密
+
+ArticleChange   封装加密
+
+拦截器里有两层token签名保护

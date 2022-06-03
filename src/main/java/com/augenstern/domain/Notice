@@ -1,0 +1,13 @@
+ResultBean      API
+
+Code            状态码
+
+ArticleBean     文章对象bean            // 缓存对象
+
+ServerArticleResultBean     业务层加工ArticleBean对象返回
+
+TypeAndPageBean 前端接受类型Bean参数
+
+User        查询管理员
+
+AboutMe     封装个人信息

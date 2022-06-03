@@ -1,0 +1,13 @@
+config      配置文件
+
+controller  控制层
+
+service     业务层
+
+dao         持久层
+
+domain      数据封装
+
+exception   异常
+
+aop         增强通知

@@ -1,0 +1,2 @@
+BusinessException       用户异常
+SystemException         系统异常
