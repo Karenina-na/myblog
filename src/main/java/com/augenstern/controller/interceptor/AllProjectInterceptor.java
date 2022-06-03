@@ -17,7 +17,6 @@ public class AllProjectInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-
         String[] split = request.getRequestURI().split("/");
         if (split.length>0){
             switch (split[1]){
