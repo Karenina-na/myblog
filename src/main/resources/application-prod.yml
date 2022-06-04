@@ -10,3 +10,6 @@ server:
 
   servlet:
     context-path:
+
+#转发端口
+http-port: 80

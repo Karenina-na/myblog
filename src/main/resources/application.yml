@@ -2,6 +2,7 @@ spring:
   #环境
   profiles:
     active: dev
+#    active: prod
 
 
   #数据库地址
