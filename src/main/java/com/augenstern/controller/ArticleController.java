@@ -19,7 +19,7 @@ public class ArticleController {
      * 分页查询
      */
     @GetMapping("/articles/{page}")
-    public ResultBean SelectArticleByPage(@PathVariable Integer page) {
+    public ResultBean SelectArticleByPage(@PathVariable Integer page) throws SystemException {
         ServerArticleResultBean data = articleService.SelectArticleByPage(page);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
@@ -48,7 +48,7 @@ public class ArticleController {
      * id查询文章
      */
     @GetMapping("/article/{id}")
-    public ResultBean SelectArticleById(@PathVariable Integer id) {
+    public ResultBean SelectArticleById(@PathVariable Integer id) throws BusinessException, SystemException {
         int Id = ArticleChange.FrontChangeBack(id);
         ArticleBean data = articleService.SelectArticleById(Id);
         if (data == null) {
@@ -63,7 +63,7 @@ public class ArticleController {
      * 按模糊字段查询
      */
     @GetMapping("/articles/{name}/{page}")
-    public ResultBean SelectArticleByName(@PathVariable String name, @PathVariable Integer page) {
+    public ResultBean SelectArticleByName(@PathVariable String name, @PathVariable Integer page) throws SystemException {
         ServerArticleResultBean data = articleService.SelectArticleByName(page, name);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);

@@ -9,11 +9,13 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 /**
  * 转发重定向https
  */
 @Configuration
+@Profile("prod")
 public class HttpsConfiguration {
     @Value("${http-port}")
     private int port;

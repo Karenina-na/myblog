@@ -2,6 +2,7 @@ package com.augenstern.controller;
 
 import com.augenstern.controller.util.ArticleChange;
 import com.augenstern.domain.*;
+import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.MyService;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class MyController {
      */
     @DeleteMapping("/Article")
     @ResponseBody
-    public ResultBean DeleteArticle(@RequestBody ArticleBean articleBean) throws SystemException {
+    public ResultBean DeleteArticle(@RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
         ArticleChange.FrontChangeBack(articleBean);
         boolean result = myService.DeleteArticle(articleBean);
         if (result) {
@@ -50,7 +51,7 @@ public class MyController {
      */
     @PutMapping("/Article")
     @ResponseBody
-    public ResultBean UpdateArticle(@RequestBody ArticleBean articleBean) throws SystemException {
+    public ResultBean UpdateArticle(@RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
         ArticleChange.FrontChangeBack(articleBean);
         boolean result = myService.UpdateArticle(articleBean);
         if (result) {
