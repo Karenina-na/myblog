@@ -5,13 +5,19 @@ import com.augenstern.domain.*;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.MyService;
-import org.springframework.stereotype.Controller;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-@Controller
+/**
+ * 管理控制器
+ */
+@RestController
 @RequestMapping("/rootManager")
+@Api(tags ="管理员控制器")
 public class MyController {
 
     @Resource
@@ -21,8 +27,8 @@ public class MyController {
      * 增
      */
     @PostMapping("/Article")
-    @ResponseBody
-    public ResultBean AddArticle(@RequestBody ArticleBean articleBean) throws SystemException {
+    @ApiOperation("增加文章")
+    public ResultBean AddArticle(@ApiParam("ArticleBean 文章类") @RequestBody ArticleBean articleBean) throws SystemException {
         boolean result = myService.AddArticle(articleBean);
         if (result) {
             return new ResultBean(true, Code.SAVE_OK);
@@ -35,8 +41,8 @@ public class MyController {
      * 删
      */
     @DeleteMapping("/Article")
-    @ResponseBody
-    public ResultBean DeleteArticle(@RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
+    @ApiOperation("删除文章")
+    public ResultBean DeleteArticle(@ApiParam("ArticleBean 文章类") @RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
         ArticleChange.FrontChangeBack(articleBean);
         boolean result = myService.DeleteArticle(articleBean);
         if (result) {
@@ -50,8 +56,8 @@ public class MyController {
      * 改
      */
     @PutMapping("/Article")
-    @ResponseBody
-    public ResultBean UpdateArticle(@RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
+    @ApiOperation("更改文章")
+    public ResultBean UpdateArticle(@ApiParam("ArticleBean 文章类") @RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
         ArticleChange.FrontChangeBack(articleBean);
         boolean result = myService.UpdateArticle(articleBean);
         if (result) {
@@ -65,8 +71,8 @@ public class MyController {
      * 查询用户名密码
      */
     @PostMapping("")
-    @ResponseBody
-    public ResultBean GetRootManager(@RequestBody User user) {
+    @ApiOperation("查询管理账号密码")
+    public ResultBean GetRootManager(@ApiParam("User 用户类") @RequestBody User user) {
 
         boolean result = myService.SelectRoot(user.getUsername(), user.getPassword());
         if (result) {
@@ -80,8 +86,8 @@ public class MyController {
      * 更改个人信息
      */
     @PutMapping("/About")
-    @ResponseBody
-    public ResultBean UpdateAboutMe(@RequestBody AboutMe aboutMe){
+    @ApiOperation("更改个人信息")
+    public ResultBean UpdateAboutMe(@ApiParam("AboutMe aboutMe类") @RequestBody AboutMe aboutMe){
         boolean result = myService.UpdateAboutMe(aboutMe);
         if (result){
             return new ResultBean(true,Code.UPDATE_OK);

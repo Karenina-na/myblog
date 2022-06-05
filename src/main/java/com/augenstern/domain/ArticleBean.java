@@ -1,18 +1,28 @@
 package com.augenstern.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * 文章对象Bean
  */
+@ApiModel(description = "文章对象封装")
 public class ArticleBean implements Serializable {
 
+    @ApiModelProperty("标签列表")
     public List<String> tags;
+    @ApiModelProperty("id")
     private int id;
+    @ApiModelProperty("日期")
     private String date;
+    @ApiModelProperty("标题")
     private String title;
+    @ApiModelProperty("作者")
     private String author;
+    @ApiModelProperty("内容")
     private String messages;
 
     @Override

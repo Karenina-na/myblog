@@ -1,12 +1,20 @@
 package com.augenstern.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 数据交互格式
  */
+@ApiModel(description = "前后端数据交互格式")
 public class ResultBean {
+    @ApiModelProperty("数据")
     private Object data;
+    @ApiModelProperty("状态码")
     private Integer code;
+    @ApiModelProperty("后端错误信息")
     private String msg;
+    @ApiModelProperty("总页数")
     private Integer TotalPage;
 
     public ResultBean(Object data, Integer code, Integer totalPage) {

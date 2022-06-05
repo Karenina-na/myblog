@@ -1,9 +1,14 @@
 spring:
   #环境
   profiles:
-#    active: dev
-    active: prod
+    active: dev
+#    active: prod
 
+  application:
+    name: Myblog
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
   #数据库地址
   datasource:
@@ -31,3 +36,5 @@ logging:
     org.apache: off
     org.springframework: off
     org.mybatis: off
+    org.aspectj: off
+    springfox: off

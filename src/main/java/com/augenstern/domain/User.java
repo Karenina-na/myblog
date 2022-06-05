@@ -1,13 +1,20 @@
 package com.augenstern.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
- * 用户格式
+ * 前后端账号密码交互格式
  */
+@ApiModel(description = "前后端账号密码交互格式")
 public class User implements Serializable {
+    @ApiModelProperty("id")
     private String id;
+    @ApiModelProperty("用户名")
     private String username;
+    @ApiModelProperty("密码")
     private String password;
 
     public User() {

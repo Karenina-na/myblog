@@ -1,12 +1,17 @@
 package com.augenstern.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
  * 必要数据bean
  */
+@ApiModel(description = "AboutMe数据封装")
 public class AboutMe implements Serializable {
 
+    @ApiModelProperty("作者")
     private String author;
 
     @Override
@@ -18,8 +23,11 @@ public class AboutMe implements Serializable {
                 '}';
     }
 
+
+    @ApiModelProperty("简介")
     private String introduce;
 
+    @ApiModelProperty("公告")
     private String notice;
 
     public AboutMe(String author, String introduce, String notice) {

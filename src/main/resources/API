@@ -1,0 +1,15 @@
+前端接口:
+    resp.data.data  后端数据
+    resp.data.code  状态码
+    resp.data.total 总行数
+    resp.data.msg   后端异常说明
+
+    类型接口:"笔记", "日常", "技术", "后端", "前端", "c与c++", "java", "python","数据库"
+
+
+# 访问地址 http://localhost/swagger-ui/index.html
+# 访问地址 http://localhost/doc.html
+头
+    Req     1011011011011
+    Man     10101101111000
+
