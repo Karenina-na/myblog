@@ -1,3 +1,7 @@
 SpringMvcConfig     SpringMVC   配置
 
 MybatisConfig       MyBatis 配置
+
+HttpsConfiguration  http转发为https
+
+SwaggerConfiguration    SwaggerAPI文档配置类
