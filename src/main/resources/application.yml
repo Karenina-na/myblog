@@ -10,20 +10,6 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
-  #数据库地址
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: 2167137570legacy
-    url: jdbc:mysql://127.0.0.1:3306/Myblog?useSSL=false&useServerPrepStmts=TRUE
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  redis:
-    host: 127.0.0.1
-    database: 0
-    port: 6379
-    connect-timeout: 5000
-
 #日志
 logging:
   level:

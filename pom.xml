@@ -77,11 +77,11 @@
         </dependency>
 
         <!--缓存类-->
-        <dependency>
-            <groupId>org.mybatis.caches</groupId>
-            <artifactId>mybatis-redis</artifactId>
-            <version>${mybatis-redis.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.caches</groupId>-->
+<!--            <artifactId>mybatis-redis</artifactId>-->
+<!--            <version>${mybatis-redis.version}</version>-->
+<!--        </dependency>-->
 
         <!--分页助手mybatis插件-->
         <dependency>

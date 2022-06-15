@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.CacheNamespace;
 /**
  * 缓存空间
  */
-@CacheNamespace(implementation = org.mybatis.caches.redis.RedisCache.class)
+@CacheNamespace()
 public interface Cache {
 }
