@@ -14,10 +14,6 @@ spring:
     multipart:
       max-file-size: -1
       max-request-size: -1
-
-  web:
-    resources:
-      static-locations: file:./
 #日志
 logging:
   level:

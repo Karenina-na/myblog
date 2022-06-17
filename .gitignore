@@ -4,7 +4,6 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 log_out/
-img/
 
 ### STS ###
 .apt_generated

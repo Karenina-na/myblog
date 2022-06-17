@@ -42,7 +42,7 @@ public class ProjectExceptionAdvice {
     public FileUploadResultBean doException(FileUploadException ex) {
         LOGGER.warn(request.getRemoteAddr() + " " + request.getRequestURL());
         LOGGER.warn("文件上传异常--" + ex.getMessage());
-        return new FileUploadResultBean(1, ex.getMessage());
+        return new FileUploadResultBean(0, ex.getMessage());
     }
 
     /**

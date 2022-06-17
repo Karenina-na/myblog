@@ -14,8 +14,6 @@ spring:
     url: jdbc:mysql://192.168.71.128/Myblog?useSSL=false&useServerPrepStmts=TRUE
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-ADDRESS: "http://localhost"
-
 #  redis:
 #    host: 192.168.71.128
 #    port: 6379
