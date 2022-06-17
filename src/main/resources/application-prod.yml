@@ -20,11 +20,5 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/Myblog?useSSL=false&useServerPrepStmts=TRUE
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-  redis:
-    host: 127.0.0.1
-    database: 0
-    port: 6379
-    connect-timeout: 5000
-
 #转发端口
 http-port: 80

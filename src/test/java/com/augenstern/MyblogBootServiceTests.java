@@ -6,6 +6,7 @@ import com.augenstern.domain.ServerArticleResultBean;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.ArticleService;
+import com.augenstern.service.FileUploadService;
 import com.augenstern.service.MyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

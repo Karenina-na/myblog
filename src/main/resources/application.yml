@@ -10,6 +10,10 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
 #日志
 logging:
   level:
