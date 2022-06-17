@@ -20,7 +20,7 @@ logging:
     _org: off
     reactor: off
     org.apache: off
-    org.springframework: off
+#    org.springframework: off
     org.mybatis: off
     org.aspectj: off
     springfox: off

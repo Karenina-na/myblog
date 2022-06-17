@@ -18,6 +18,10 @@ public class Code {
     @ApiModelProperty("获取成功")
     public static final Integer GET_OK = 20042;
 
+    @ApiModelProperty("文件保存成功")
+    public static final Integer File_SAVE_OK = 30011;
+
+
     @ApiModelProperty("保存失败")
     public static final Integer SAVE_ERR = 20010;
     @ApiModelProperty("删除失败")
@@ -26,6 +30,14 @@ public class Code {
     public static final Integer UPDATE_ERR = 20030;
     @ApiModelProperty("获取失败")
     public static final Integer GET_ERR = 20040;
+
+    @ApiModelProperty("文件保存失败")
+    public static final Integer File_SAVE_ERR = 30010;
+
+
+    @ApiModelProperty("文件为空")
+    public static final Integer File_Empty = 39999;
+
 
     @ApiModelProperty("系统错误")
     public static final Integer SYSTEM_ERR = 50001;

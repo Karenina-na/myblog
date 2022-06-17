@@ -2,6 +2,10 @@ ProjectExceptionAdvice      全局异常处理器
 
 ArticleController           文章页面处理器
 
+MyController                管理页面处理器
+
+FileController              文件上传处理器
+
 AllProjectInterceptor       全局拦截器
 
 IdChange    id地址加密

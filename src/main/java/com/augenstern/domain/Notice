@@ -11,3 +11,5 @@ TypeAndPageBean 前端接受类型Bean参数
 User        查询管理员
 
 AboutMe     封装个人信息
+
+FileUploadResultBean        前端富文本编辑器返回数据格式

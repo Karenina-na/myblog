@@ -1,2 +1,3 @@
 BusinessException       用户异常
 SystemException         系统异常
+FileUploadException     文件上传异常

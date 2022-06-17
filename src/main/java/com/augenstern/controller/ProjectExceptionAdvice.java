@@ -3,6 +3,7 @@ package com.augenstern.controller;
 import com.augenstern.domain.Code;
 import com.augenstern.domain.ResultBean;
 import com.augenstern.exception.BusinessException;
+import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,16 @@ public class ProjectExceptionAdvice {
     public ResultBean doException(SystemException ex) {
         LOGGER.warn(request.getRemoteAddr() + " " + request.getRequestURL());
         LOGGER.warn("系统异常--" + ex.getMessage());
+        return new ResultBean(null, ex.getCode(), ex.getMessage());
+    }
+
+    /**
+     * 文件上传异常
+     */
+    @ExceptionHandler(FileUploadException.class)
+    public ResultBean doException(FileUploadException ex) {
+        LOGGER.warn(request.getRemoteAddr() + " " + request.getRequestURL());
+        LOGGER.warn("文件上传异常--" + ex.getMessage());
         return new ResultBean(null, ex.getCode(), ex.getMessage());
     }
 
