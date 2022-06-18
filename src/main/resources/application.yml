@@ -6,8 +6,9 @@ spring:
 
   application:
     name: Myblog
+    
   mvc:
-    pathmatch:
+    path match:
       matching-strategy: ant_path_matcher
 
   servlet:
@@ -17,14 +18,4 @@ spring:
 #日志
 logging:
   level:
-    java: off
-    javax: off
-    io: off
-    sun: off
-    _org: off
-    reactor: off
-    org.apache: off
-#    org.springframework: off
-    org.mybatis: off
-    org.aspectj: off
-    springfox: off
+    root: info

@@ -30,7 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ServerArticleResultBean SelectArticleByType(int page, String name) throws BusinessException, SystemException {
+    public ServerArticleResultBean SelectArticleByType(int page, String name) throws BusinessException {
         if (TagUtil.CheckTagsName(name)) {
             PageHelper.startPage(page, 6);
             List<ArticleBean> articleBeans = articleDao.selectArticleByType(name);
@@ -51,7 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
         PageHelper.startPage(page, 6);
         List<ArticleBean> articleBeans = articleDao.selectArticleByName("%" + name + "%");
         int total = articleDao.selectArticleByNameNumber(name);
-        return new ServerArticleResultBean(articleBeans,total);
+        return new ServerArticleResultBean(articleBeans, total);
     }
 
     @Override

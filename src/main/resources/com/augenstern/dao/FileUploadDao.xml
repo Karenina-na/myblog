@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.augenstern.dao.FileUploadDao">
+
+    <cache-ref namespace="com.augenstern.dao.Cache"/>
+
+    <!--资源目录对象封装-->
+    <resultMap id="Source" type="com.augenstern.domain.SourceBean">
+        <result column="type" property="type"/>
+        <result column="name" property="name"/>
+        <result column="date" property="date"/>
+    </resultMap>
+</mapper>

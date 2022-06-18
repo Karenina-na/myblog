@@ -3,15 +3,14 @@ package com.augenstern.controller;
 import com.augenstern.domain.Code;
 import com.augenstern.domain.FileUploadResultBean;
 import com.augenstern.domain.ResultBean;
+import com.augenstern.domain.ServerSourceResultBean;
 import com.augenstern.exception.FileUploadException;
+import com.augenstern.exception.SystemException;
 import com.augenstern.service.FileUploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -30,7 +29,6 @@ public class FileController {
 
     /**
      * 上传图片
-     *
      * @param file
      * @return
      */
@@ -48,6 +46,40 @@ public class FileController {
         }
         else {
             return new FileUploadResultBean(1,new FileUploadResultBean.data(result));
+        }
+    }
+
+    /**
+     * 分页获取图片
+     * @param page
+     * @return
+     */
+    @ApiOperation("获取图片")
+    @GetMapping("/img/{page}")
+    public ResultBean GetImage(@ApiParam("页码") @PathVariable Integer page){
+        ServerSourceResultBean data = fileUploadService.SelectImg(page);
+        if (data==null) {
+            return new ResultBean(null, Code.GET_ERR);
+        }
+        else{
+            return new ResultBean(data.getSource(),Code.GET_OK,data.getTotal());
+        }
+    }
+
+
+    /**
+     * 删除图片
+     * @param
+     * @return
+     */
+    @ApiOperation("删除图片")
+    @DeleteMapping("/img")
+    public ResultBean DeleteImage(@ApiParam("文件名") String name) throws SystemException {
+        boolean result = fileUploadService.DeleteImg(name);
+        if (result) {
+            return new ResultBean(true, Code.DELETE_OK);
+        } else {
+            return new ResultBean(false, Code.DELETE_ERR, "删除错误");
         }
     }
 }
