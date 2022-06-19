@@ -18,7 +18,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +54,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     @Override
     public ServerSourceResultBean SelectImg(int page) {
-        PageHelper.startPage(page, 15);
+        PageHelper.startPage(page, 6);
         List<SourceBean> sourceBeans = fileUploadDao.selectAllImage();
         for (SourceBean sourceBean : sourceBeans) {
             String name = sourceBean.getName();
@@ -68,7 +67,8 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     @Override
     public boolean DeleteImg(String name) throws SystemException {
-        Path path = Paths.get(name);
+        String filePath = System.getProperty("user.dir")+File.separator+"img"+ File.separator;
+        Path path = Paths.get(filePath+name);
         try {
             Files.delete(path);   //返回值void
             int count = fileUploadDao.deleteImage(name);

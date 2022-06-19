@@ -73,8 +73,9 @@ public class FileController {
      * @return
      */
     @ApiOperation("删除图片")
-    @DeleteMapping("/img")
-    public ResultBean DeleteImage(@ApiParam("文件名") String name) throws SystemException {
+    @DeleteMapping("/img/{name}")
+    public ResultBean DeleteImage(@ApiParam("文件名") @PathVariable String name) throws SystemException {
+        System.out.println(name);
         boolean result = fileUploadService.DeleteImg(name);
         if (result) {
             return new ResultBean(true, Code.DELETE_OK);

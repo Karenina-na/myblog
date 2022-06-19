@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * 上传文件数据层
  */
-@CacheNamespaceRef(name = "com.augenstern.dao.Cache")
 public interface FileUploadDao {
 
     /**
