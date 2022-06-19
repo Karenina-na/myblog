@@ -37,15 +37,15 @@ public class FileController {
     public FileUploadResultBean UpLoadImage(@RequestParam("file") @ApiParam("MultipartFile 文件类") MultipartFile file,
                                             @ApiParam("HttpServletRequest 请求类") HttpServletRequest request) throws  FileUploadException {
         if (file.isEmpty()){
-            return new FileUploadResultBean(0, "图片为空");
+            return new FileUploadResultBean(1, "图片为空");
         }
         String result = fileUploadService.UploadImg(file,request);
         if (result==null){
-            return new FileUploadResultBean(0,"图片上传错误");
+            return new FileUploadResultBean(1,"图片上传错误");
 
         }
         else {
-            return new FileUploadResultBean(1,new FileUploadResultBean.data(result));
+            return new FileUploadResultBean(0,new FileUploadResultBean.data(result));
         }
     }
 
@@ -56,7 +56,7 @@ public class FileController {
      */
     @ApiOperation("获取图片")
     @GetMapping("/img/{page}")
-    public ResultBean GetImage(@ApiParam("页码") @PathVariable Integer page){
+    public ResultBean GetImage(@ApiParam("页码") @PathVariable Integer page)  {
         ServerSourceResultBean data = fileUploadService.SelectImg(page);
         if (data==null) {
             return new ResultBean(null, Code.GET_ERR);

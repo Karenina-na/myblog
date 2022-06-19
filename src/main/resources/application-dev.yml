@@ -13,3 +13,6 @@ spring:
     password: 2167137570legacy
     url: jdbc:mysql://192.168.71.128/Myblog?useSSL=false&useServerPrepStmts=TRUE
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+#地址
+URL: http://localhost

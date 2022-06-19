@@ -8,6 +8,7 @@ import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.FileUploadService;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,31 +29,39 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Resource
     private FileUploadDao fileUploadDao;
 
+    @Value("${URL}")
+    private String URL;
+
     @Override
     public String UploadImg(MultipartFile file , HttpServletRequest request) throws  FileUploadException {
 
         long timeInMillis = Calendar.getInstance().getTimeInMillis();
 
         String filename = timeInMillis+"_"+file.getOriginalFilename();
-        String filePath = System.getProperty("user.dir")+"/img";
+        String filePath = System.getProperty("user.dir")+File.separator+"img";
         if (!new File(filePath).exists()){
             new File(filePath).mkdirs();
         }
         File dest = new File(filePath + File.separator+filename);
 
-        fileUploadDao.addImage(dest.getPath(), String.valueOf(new Date()));
+        fileUploadDao.addImage(filename, String.valueOf(new Date()));
         try {
             file.transferTo(dest);
         }catch (Exception e){
             throw new FileUploadException(e.getMessage(), Code.File_SAVE_ERR);
         }
-        return dest.getPath();
+        return URL+"/"+"img"+File.separator+filename;
     }
 
     @Override
     public ServerSourceResultBean SelectImg(int page) {
         PageHelper.startPage(page, 15);
         List<SourceBean> sourceBeans = fileUploadDao.selectAllImage();
+        for (SourceBean sourceBean : sourceBeans) {
+            String name = sourceBean.getName();
+            name=URL+"/" + "img"+File.separator+name;
+            sourceBean.setName(name);
+        }
         int total = fileUploadDao.selectTotalImage();
         return new ServerSourceResultBean(sourceBeans,total);
     }

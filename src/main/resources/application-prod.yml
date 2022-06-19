@@ -22,3 +22,6 @@ spring:
 
 #转发端口
 http-port: 80
+
+#地址
+URL: https://www.augenstern.online
