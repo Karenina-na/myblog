@@ -31,13 +31,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        ApplicationHome h=new ApplicationHome();
-        String realPath = h.getSource().getParentFile().toString();
-
         //图片资源+
         registry.addResourceHandler("/image/**")
-                .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+realPath
-                                + System.getProperty("file.separator") +
+                .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+"./"+
                         "image" + System.getProperty("file.separator"));
 
         //前端资源

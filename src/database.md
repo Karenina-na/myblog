@@ -43,6 +43,7 @@ date VARCHAR(255) NOT NULL
 );
 
 insert into Tag values(null,'笔记'),(null,'日常'),(null,'技术'),(null,'后端')
-,(null,'前端'),(null,'c与c++'),(null,'java'),(null,'python'),(null,'数据库');
+,(null,'前端'),(null,'c与c++'),(null,'java'),(null,'python'),(null,'数据库')
+,(null,'Go');
 
 insert into AboutMe values(null,'Augenstern','介绍','公告');

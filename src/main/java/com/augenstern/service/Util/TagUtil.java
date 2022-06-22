@@ -12,7 +12,9 @@ public class TagUtil {
 
     static {
         Tags = Arrays.asList(
-                "笔记", "日常", "技术", "后端", "前端", "c与c++", "java", "python", "数据库"
+                "笔记", "日常", "技术", "后端", "前端",
+                "c与c++", "java", "python", "数据库",
+                "Go"
         );
     }
 
