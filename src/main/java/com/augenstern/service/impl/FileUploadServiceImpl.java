@@ -37,7 +37,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         long timeInMillis = Calendar.getInstance().getTimeInMillis();
 
         String filename = timeInMillis+"_"+file.getOriginalFilename();
-        String filePath = System.getProperty("user.dir")+File.separator+"img";
+        String filePath = System.getProperty("user.dir")+File.separator+"image";
         if (!new File(filePath).exists()){
             new File(filePath).mkdirs();
         }
@@ -49,7 +49,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         }catch (Exception e){
             throw new FileUploadException(e.getMessage(), Code.File_SAVE_ERR);
         }
-        return URL+"/"+"img"+File.separator+filename;
+        return URL+"/"+"image"+File.separator+filename;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FileUploadServiceImpl implements FileUploadService {
         List<SourceBean> sourceBeans = fileUploadDao.selectAllImage();
         for (SourceBean sourceBean : sourceBeans) {
             String name = sourceBean.getName();
-            name=URL+"/" + "img"+File.separator+name;
+            name=URL+"/" + "image"+File.separator+name;
             sourceBean.setName(name);
         }
         int total = fileUploadDao.selectTotalImage();
@@ -67,7 +67,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     @Override
     public boolean DeleteImg(String name) throws SystemException {
-        String filePath = System.getProperty("user.dir")+File.separator+"img"+ File.separator;
+        String filePath = System.getProperty("user.dir")+File.separator+"image"+ File.separator;
         Path path = Paths.get(filePath+name);
         try {
             Files.delete(path);   //返回值void

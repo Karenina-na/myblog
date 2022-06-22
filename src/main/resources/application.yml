@@ -16,10 +16,6 @@ spring:
       max-file-size: -1
       max-request-size: -1
 
-  #开放本地目录静态资源
-  web:
-    resources:
-      static-locations: file:./
 #日志
 logging:
   level:
