@@ -3,12 +3,10 @@ package com.augenstern.service.impl;
 import com.augenstern.dao.FileUploadDao;
 import com.augenstern.entity.Code;
 import com.augenstern.entity.dao.SourceBean;
-import com.augenstern.entity.server.Article;
 import com.augenstern.entity.server.SourcesResult;
 import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
-import com.augenstern.service.FileUploadService;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.augenstern.service.FileService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class FileUploadServiceImpl implements FileUploadService {
+public class FileServiceImpl implements FileService {
 
     @Resource
     private FileUploadDao fileUploadDao;

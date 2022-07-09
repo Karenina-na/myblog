@@ -5,8 +5,8 @@ import com.augenstern.entity.server.Article;
 import com.augenstern.entity.server.ArticlesResult;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
-import com.augenstern.service.ArticleService;
-import com.augenstern.service.MyService;
+import com.augenstern.service.Consumer;
+import com.augenstern.service.RootService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,14 +18,14 @@ import java.util.List;
 public class MyblogBootServiceTests {
 
     @Resource
-    ArticleService articleService;
+    Consumer consumer;
 
     /**
      * 总查询
      */
     @Test
     public void SelectArticleByPageTest(){
-        ArticlesResult articleResults = articleService.SelectArticleByPage(1);
+        ArticlesResult articleResults = consumer.SelectArticleByPage(1);
         System.out.println(articleResults);
     }
 
@@ -36,7 +36,7 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByTypeTest() throws BusinessException, SystemException {
-        ArticlesResult articleResults = articleService.SelectArticleByType(1, "python");
+        ArticlesResult articleResults = consumer.SelectArticleByType(1, "python");
         System.out.println(articleResults);
     }
 
@@ -45,7 +45,7 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByIdTest(){
-        Article article = articleService.SelectArticleById(6);
+        Article article = consumer.SelectArticleById(6);
         System.out.println(article);
     }
 
@@ -54,7 +54,7 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByNameTest(){
-        ArticlesResult articleResults = articleService.SelectArticleByName(1, "输");
+        ArticlesResult articleResults = consumer.SelectArticleByName(1, "输");
         System.out.println(articleResults);
     }
 
@@ -63,13 +63,13 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectAboutMeTest(){
-        AboutMeBean aboutMeBean = articleService.SelectAboutMe();
+        AboutMeBean aboutMeBean = consumer.SelectAboutMe();
         System.out.println(aboutMeBean);
     }
 
 
     @Resource
-    MyService myService;
+    RootService rootService;
 
     /**
      * 增加
@@ -82,8 +82,8 @@ public class MyblogBootServiceTests {
         article.setTitle("1");
         article.setAuthor("作者");
         article.setDate("2022-1-1");
-        myService.AddArticle(article);
-        ArticlesResult articlesResult = articleService.SelectArticleByName(1, "1");
+        rootService.AddArticle(article);
+        ArticlesResult articlesResult = consumer.SelectArticleByName(1, "1");
         System.out.println(articlesResult);
     }
 
@@ -96,8 +96,8 @@ public class MyblogBootServiceTests {
     public void deleteArticleTest() throws SystemException {
         Article article = new Article();
         article.setId(8);
-        myService.DeleteArticle(article);
-        ArticlesResult articlesResult = articleService.SelectArticleByName(1, "1");
+        rootService.DeleteArticle(article);
+        ArticlesResult articlesResult = consumer.SelectArticleByName(1, "1");
         System.out.println(articlesResult);
     }
 
@@ -115,14 +115,14 @@ public class MyblogBootServiceTests {
         List<String> tags=new ArrayList<>();
         tags.add("java");
         article.setTags(tags);
-        myService.AddArticle(article);
-        ArticlesResult articlesResult1 = articleService.SelectArticleByName(1, "1");
+        rootService.AddArticle(article);
+        ArticlesResult articlesResult1 = consumer.SelectArticleByName(1, "1");
         System.out.println(articlesResult1);
 
         article.setMessages("修改");
         article.setId(articlesResult1.getArticles().get(0).getId());
-        myService.UpdateArticle(article);
-        ArticlesResult articlesResult2 = articleService.SelectArticleByName(1, "1");
+        rootService.UpdateArticle(article);
+        ArticlesResult articlesResult2 = consumer.SelectArticleByName(1, "1");
         System.out.println(articlesResult2);
     }
 
@@ -131,7 +131,7 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectRootTest(){
-        boolean root = myService.SelectRoot("123", "123");
+        boolean root = rootService.SelectRoot("123", "123");
         System.out.println(root);
     }
 
@@ -144,7 +144,7 @@ public class MyblogBootServiceTests {
         aboutMe.setAuthor("a");
         aboutMe.setIntroduce("b");
         aboutMe.setNotice("c");
-        myService.UpdateAboutMe(aboutMe);
-        System.out.println(articleService.SelectAboutMe());
+        rootService.UpdateAboutMe(aboutMe);
+        System.out.println(consumer.SelectAboutMe());
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 操作业务层
  */
-public interface MyService {
+public interface RootService {
 
     /**
      * 增加文章

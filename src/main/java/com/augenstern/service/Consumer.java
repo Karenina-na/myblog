@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 查询业务层
  */
-public interface ArticleService {
+public interface Consumer {
 
     /**
      * 总查询

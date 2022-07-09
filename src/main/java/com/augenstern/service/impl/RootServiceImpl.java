@@ -7,7 +7,7 @@ import com.augenstern.entity.dao.AboutMeBean;
 import com.augenstern.entity.dao.UserBean;
 import com.augenstern.entity.server.Article;
 import com.augenstern.exception.SystemException;
-import com.augenstern.service.MyService;
+import com.augenstern.service.RootService;
 import com.augenstern.service.Util.TagUtil;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class MyServiceImpl implements MyService {
+public class RootServiceImpl implements RootService {
     @Resource
     private MyDao myDao;
 

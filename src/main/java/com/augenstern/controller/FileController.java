@@ -6,7 +6,7 @@ import com.augenstern.entity.controller.ResultBean;
 import com.augenstern.entity.server.SourcesResult;
 import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
-import com.augenstern.service.FileUploadService;
+import com.augenstern.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 public class FileController {
 
     @Resource
-    private FileUploadService fileUploadService;
+    private FileService fileService;
 
     /**
      * 上传图片
@@ -39,7 +39,7 @@ public class FileController {
         if (file.isEmpty()){
             return new ImgUploadResult(1, "图片为空");
         }
-        String result = fileUploadService.UploadImg(file,request);
+        String result = fileService.UploadImg(file,request);
         if (result==null){
             return new ImgUploadResult(1,"图片上传错误");
 
@@ -57,7 +57,7 @@ public class FileController {
     @ApiOperation("获取图片")
     @GetMapping("/img/{page}")
     public ResultBean GetImage(@ApiParam("页码") @PathVariable Integer page)  {
-        SourcesResult data = fileUploadService.SelectImg(page);
+        SourcesResult data = fileService.SelectImg(page);
         if (data==null) {
             return new ResultBean(null, Code.GET_ERR);
         }
@@ -75,7 +75,7 @@ public class FileController {
     @ApiOperation("删除图片")
     @DeleteMapping("/img/{name}")
     public ResultBean DeleteImage(@ApiParam("文件名") @PathVariable String name) throws SystemException {
-        boolean result = fileUploadService.DeleteImg(name);
+        boolean result = fileService.DeleteImg(name);
         if (result) {
             return new ResultBean(true, Code.DELETE_OK);
         } else {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 文件上传业务层
  */
-public interface FileUploadService {
+public interface FileService {
 
     /**
      * 上传图片

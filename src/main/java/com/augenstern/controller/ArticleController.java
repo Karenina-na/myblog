@@ -9,7 +9,7 @@ import com.augenstern.entity.server.Article;
 import com.augenstern.entity.server.ArticlesResult;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
-import com.augenstern.service.ArticleService;
+import com.augenstern.service.Consumer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 public class ArticleController {
 
     @Resource
-    private ArticleService articleService;
+    private Consumer consumer;
 
     /**
      * 分页查询
@@ -33,7 +33,7 @@ public class ArticleController {
     @ApiOperation("分页查询全部")
     @GetMapping("/articles/{page}")
     public ResultBean SelectArticleByPage(@ApiParam("页码") @PathVariable Integer page) throws SystemException {
-        ArticlesResult data = articleService.SelectArticleByPage(page);
+        ArticlesResult data = consumer.SelectArticleByPage(page);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
@@ -48,7 +48,7 @@ public class ArticleController {
     @ApiOperation("分页类型查询")
     @PostMapping("/articles")
     public ResultBean SelectArticleByType(@ApiParam("TypeAndPageBean 类型和页码类") @RequestBody TypeAndPageBean TypeAndPage) throws BusinessException, SystemException {
-        ArticlesResult data = articleService.SelectArticleByType(
+        ArticlesResult data = consumer.SelectArticleByType(
                 TypeAndPage.getPage(), TypeAndPage.getType());
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
@@ -65,7 +65,7 @@ public class ArticleController {
     @GetMapping("/article/{id}")
     public ResultBean SelectArticleById(@ApiParam("文章id") @PathVariable Integer id) throws BusinessException, SystemException {
         int Id = ArticleChange.FrontChangeBack(id);
-        Article data = articleService.SelectArticleById(Id);
+        Article data = consumer.SelectArticleById(Id);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
@@ -80,7 +80,7 @@ public class ArticleController {
     @ApiOperation("模糊字段查询")
     @GetMapping("/articles/{name}/{page}")
     public ResultBean SelectArticleByName(@ApiParam("模糊字段") @PathVariable String name, @ApiParam("页码") @PathVariable Integer page) throws SystemException {
-        ArticlesResult data = articleService.SelectArticleByName(page, name);
+        ArticlesResult data = consumer.SelectArticleByName(page, name);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
@@ -95,7 +95,7 @@ public class ArticleController {
     @ApiOperation("查询必要数据")
     @GetMapping("/about")
     public ResultBean SelectAboutMethod(){
-        AboutMeBean data = articleService.SelectAboutMe();
+        AboutMeBean data = consumer.SelectAboutMe();
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {

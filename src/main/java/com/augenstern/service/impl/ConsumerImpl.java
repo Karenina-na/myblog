@@ -6,7 +6,7 @@ import com.augenstern.entity.dao.AboutMeBean;
 import com.augenstern.entity.server.Article;
 import com.augenstern.entity.server.ArticlesResult;
 import com.augenstern.exception.BusinessException;
-import com.augenstern.service.ArticleService;
+import com.augenstern.service.Consumer;
 import com.augenstern.service.Util.TagUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class ArticleServiceImpl implements ArticleService {
+public class ConsumerImpl implements Consumer {
 
     @Resource
     private ArticleDao articleDao;

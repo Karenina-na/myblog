@@ -17,10 +17,6 @@ public class ExceptionAdvice {
     private void servicePt() {
     }
 
-//    @Pointcut("execution(* com.augenstern.dao.*.*(..))")
-//    private void daoPt() {
-//    }
-
     @Pointcut("execution(* com.augenstern.controller.*.*(..))")
     private void controllerPt() {
     }
