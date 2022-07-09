@@ -1,7 +1,12 @@
 package com.augenstern.controller;
 
 import com.augenstern.controller.util.ArticleChange;
-import com.augenstern.domain.*;
+import com.augenstern.entity.*;
+import com.augenstern.entity.controller.ResultBean;
+import com.augenstern.entity.controller.TypeAndPageBean;
+import com.augenstern.entity.dao.AboutMeBean;
+import com.augenstern.entity.server.Article;
+import com.augenstern.entity.server.ArticlesResult;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.ArticleService;
@@ -28,12 +33,12 @@ public class ArticleController {
     @ApiOperation("分页查询全部")
     @GetMapping("/articles/{page}")
     public ResultBean SelectArticleByPage(@ApiParam("页码") @PathVariable Integer page) throws SystemException {
-        ServerArticleResultBean data = articleService.SelectArticleByPage(page);
+        ArticlesResult data = articleService.SelectArticleByPage(page);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
             ArticleChange.BackChangeFront(data);
-            return new ResultBean(data.getArticleBean(), Code.GET_OK, data.getTotal());
+            return new ResultBean(data.getArticles(), Code.GET_OK, data.getTotal());
         }
     }
 
@@ -43,13 +48,13 @@ public class ArticleController {
     @ApiOperation("分页类型查询")
     @PostMapping("/articles")
     public ResultBean SelectArticleByType(@ApiParam("TypeAndPageBean 类型和页码类") @RequestBody TypeAndPageBean TypeAndPage) throws BusinessException, SystemException {
-        ServerArticleResultBean data = articleService.SelectArticleByType(
+        ArticlesResult data = articleService.SelectArticleByType(
                 TypeAndPage.getPage(), TypeAndPage.getType());
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
             ArticleChange.BackChangeFront(data);
-            return new ResultBean(data.getArticleBean(), Code.GET_OK, data.getTotal());
+            return new ResultBean(data.getArticles(), Code.GET_OK, data.getTotal());
         }
     }
 
@@ -60,7 +65,7 @@ public class ArticleController {
     @GetMapping("/article/{id}")
     public ResultBean SelectArticleById(@ApiParam("文章id") @PathVariable Integer id) throws BusinessException, SystemException {
         int Id = ArticleChange.FrontChangeBack(id);
-        ArticleBean data = articleService.SelectArticleById(Id);
+        Article data = articleService.SelectArticleById(Id);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
@@ -75,12 +80,12 @@ public class ArticleController {
     @ApiOperation("模糊字段查询")
     @GetMapping("/articles/{name}/{page}")
     public ResultBean SelectArticleByName(@ApiParam("模糊字段") @PathVariable String name, @ApiParam("页码") @PathVariable Integer page) throws SystemException {
-        ServerArticleResultBean data = articleService.SelectArticleByName(page, name);
+        ArticlesResult data = articleService.SelectArticleByName(page, name);
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {
             ArticleChange.BackChangeFront(data);
-            return new ResultBean(data.getArticleBean(), Code.GET_OK,data.getTotal());
+            return new ResultBean(data.getArticles(), Code.GET_OK,data.getTotal());
         }
     }
 
@@ -90,7 +95,7 @@ public class ArticleController {
     @ApiOperation("查询必要数据")
     @GetMapping("/about")
     public ResultBean SelectAboutMethod(){
-        AboutMe data = articleService.SelectAboutMe();
+        AboutMeBean data = articleService.SelectAboutMe();
         if (data == null) {
             return new ResultBean(null, Code.GET_ERR);
         } else {

@@ -1,13 +1,15 @@
 package com.augenstern.service.impl;
 
 import com.augenstern.dao.FileUploadDao;
-import com.augenstern.domain.Code;
-import com.augenstern.domain.ServerSourceResultBean;
-import com.augenstern.domain.SourceBean;
+import com.augenstern.entity.Code;
+import com.augenstern.entity.dao.SourceBean;
+import com.augenstern.entity.server.Article;
+import com.augenstern.entity.server.SourcesResult;
 import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.FileUploadService;
-import com.github.pagehelper.PageHelper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,16 +55,16 @@ public class FileUploadServiceImpl implements FileUploadService {
     }
 
     @Override
-    public ServerSourceResultBean SelectImg(int page) {
-        PageHelper.startPage(page, 6);
-        List<SourceBean> sourceBeans = fileUploadDao.selectAllImage();
+    public SourcesResult SelectImg(int page) {
+        Page<SourceBean> Page=new Page<>(page,6);
+        List<SourceBean> sourceBeans = fileUploadDao.selectAllImage(Page).getRecords();
         for (SourceBean sourceBean : sourceBeans) {
             String name = sourceBean.getName();
             name=URL+"/" + "image"+File.separator+name;
             sourceBean.setName(name);
         }
         int total = fileUploadDao.selectTotalImage();
-        return new ServerSourceResultBean(sourceBeans,total);
+        return new SourcesResult(sourceBeans,total);
     }
 
     @Override

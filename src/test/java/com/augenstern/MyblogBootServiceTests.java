@@ -1,12 +1,11 @@
 package com.augenstern;
 
-import com.augenstern.domain.AboutMe;
-import com.augenstern.domain.ArticleBean;
-import com.augenstern.domain.ServerArticleResultBean;
+import com.augenstern.entity.dao.AboutMeBean;
+import com.augenstern.entity.server.Article;
+import com.augenstern.entity.server.ArticlesResult;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.ArticleService;
-import com.augenstern.service.FileUploadService;
 import com.augenstern.service.MyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,8 +25,8 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByPageTest(){
-        ServerArticleResultBean serverArticleResultBean = articleService.SelectArticleByPage(1);
-        System.out.println(serverArticleResultBean);
+        ArticlesResult articleResults = articleService.SelectArticleByPage(1);
+        System.out.println(articleResults);
     }
 
     /**
@@ -37,8 +36,8 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByTypeTest() throws BusinessException, SystemException {
-        ServerArticleResultBean serverArticleResultBean = articleService.SelectArticleByType(1, "python");
-        System.out.println(serverArticleResultBean);
+        ArticlesResult articleResults = articleService.SelectArticleByType(1, "python");
+        System.out.println(articleResults);
     }
 
     /**
@@ -46,8 +45,8 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByIdTest(){
-        ArticleBean articleBean = articleService.SelectArticleById(1);
-        System.out.println(articleBean);
+        Article article = articleService.SelectArticleById(6);
+        System.out.println(article);
     }
 
     /**
@@ -55,8 +54,8 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectArticleByNameTest(){
-        ServerArticleResultBean serverArticleResultBean = articleService.SelectArticleByName(1, "输");
-        System.out.println(serverArticleResultBean);
+        ArticlesResult articleResults = articleService.SelectArticleByName(1, "输");
+        System.out.println(articleResults);
     }
 
     /**
@@ -64,8 +63,8 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void SelectAboutMeTest(){
-        AboutMe aboutMe = articleService.SelectAboutMe();
-        System.out.println(aboutMe);
+        AboutMeBean aboutMeBean = articleService.SelectAboutMe();
+        System.out.println(aboutMeBean);
     }
 
 
@@ -78,14 +77,14 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void addArticleTest() throws SystemException {
-        ArticleBean articleBean = new ArticleBean();
-        articleBean.setMessages("信息");
-        articleBean.setTitle("1");
-        articleBean.setAuthor("作者");
-        articleBean.setDate("2022-1-1");
-        myService.AddArticle(articleBean);
-        ServerArticleResultBean serverArticleResultBean = articleService.SelectArticleByName(1, "1");
-        System.out.println(serverArticleResultBean);
+        Article article = new Article();
+        article.setMessages("信息");
+        article.setTitle("1");
+        article.setAuthor("作者");
+        article.setDate("2022-1-1");
+        myService.AddArticle(article);
+        ArticlesResult articlesResult = articleService.SelectArticleByName(1, "1");
+        System.out.println(articlesResult);
     }
 
 
@@ -95,11 +94,11 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void deleteArticleTest() throws SystemException {
-        ArticleBean articleBean = new ArticleBean();
-        articleBean.setId(19);
-        myService.DeleteArticle(articleBean);
-        ServerArticleResultBean serverArticleResultBean = articleService.SelectArticleByName(1, "1");
-        System.out.println(serverArticleResultBean);
+        Article article = new Article();
+        article.setId(8);
+        myService.DeleteArticle(article);
+        ArticlesResult articlesResult = articleService.SelectArticleByName(1, "1");
+        System.out.println(articlesResult);
     }
 
     /**
@@ -108,23 +107,23 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void updateArticleTest() throws SystemException {
-        ArticleBean articleBean = new ArticleBean();
-        articleBean.setMessages("信息");
-        articleBean.setTitle("1");
-        articleBean.setAuthor("作者");
-        articleBean.setDate("2022-1-1");
+        Article article = new Article();
+        article.setMessages("信息");
+        article.setTitle("1");
+        article.setAuthor("作者");
+        article.setDate("2022-1-1");
         List<String> tags=new ArrayList<>();
         tags.add("java");
-        articleBean.setTags(tags);
-        myService.AddArticle(articleBean);
-        ServerArticleResultBean serverArticleResultBean1 = articleService.SelectArticleByName(1, "1");
-        System.out.println(serverArticleResultBean1);
+        article.setTags(tags);
+        myService.AddArticle(article);
+        ArticlesResult articlesResult1 = articleService.SelectArticleByName(1, "1");
+        System.out.println(articlesResult1);
 
-        articleBean.setMessages("修改");
-        articleBean.setId(serverArticleResultBean1.getArticleBean().get(0).getId());
-        myService.UpdateArticle(articleBean);
-        ServerArticleResultBean serverArticleResultBean2 = articleService.SelectArticleByName(1, "1");
-        System.out.println(serverArticleResultBean2);
+        article.setMessages("修改");
+        article.setId(articlesResult1.getArticles().get(0).getId());
+        myService.UpdateArticle(article);
+        ArticlesResult articlesResult2 = articleService.SelectArticleByName(1, "1");
+        System.out.println(articlesResult2);
     }
 
     /**
@@ -141,7 +140,7 @@ public class MyblogBootServiceTests {
      */
     @Test
     public void updateAboutMeTest(){
-        AboutMe aboutMe = new AboutMe();
+        AboutMeBean aboutMe = new AboutMeBean();
         aboutMe.setAuthor("a");
         aboutMe.setIntroduce("b");
         aboutMe.setNotice("c");

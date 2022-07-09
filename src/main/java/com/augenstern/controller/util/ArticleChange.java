@@ -1,8 +1,8 @@
 package com.augenstern.controller.util;
 
-import com.augenstern.domain.ArticleBean;
-import com.augenstern.domain.Code;
-import com.augenstern.domain.ServerArticleResultBean;
+import com.augenstern.entity.Code;
+import com.augenstern.entity.server.Article;
+import com.augenstern.entity.server.ArticlesResult;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 
@@ -17,7 +17,7 @@ public class ArticleChange {
      *
      * @param article
      */
-    public static void BackChangeFront(ArticleBean article) throws SystemException {
+    public static void BackChangeFront(Article article) throws SystemException {
         int id = IdChange.BackToFront(article.getId());
         if (id!=-1){
             article.setId(id);
@@ -27,9 +27,9 @@ public class ArticleChange {
         }
     }
 
-    public static void BackChangeFront(ServerArticleResultBean articlesBean) throws SystemException {
-        List<ArticleBean> articles = articlesBean.getArticleBean();
-        for (ArticleBean article : articles) {
+    public static void BackChangeFront(ArticlesResult articlesBean) throws SystemException {
+        List<Article> articles = articlesBean.getArticles();
+        for (Article article : articles) {
             int id = IdChange.BackToFront(article.getId());
             if (id!=-1){
                 article.setId(id);
@@ -45,7 +45,7 @@ public class ArticleChange {
      *
      * @param article
      */
-    public static void FrontChangeBack(ArticleBean article) throws BusinessException {
+    public static void FrontChangeBack(Article article) throws BusinessException {
         int id = IdChange.FrontToBack(article.getId());
         if (id!=-1){
             article.setId(id);

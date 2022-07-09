@@ -1,7 +1,11 @@
 package com.augenstern.controller;
 
 import com.augenstern.controller.util.ArticleChange;
-import com.augenstern.domain.*;
+import com.augenstern.entity.*;
+import com.augenstern.entity.controller.ResultBean;
+import com.augenstern.entity.dao.AboutMeBean;
+import com.augenstern.entity.dao.UserBean;
+import com.augenstern.entity.server.Article;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.MyService;
@@ -28,7 +32,7 @@ public class MyController {
      */
     @PostMapping("/Article")
     @ApiOperation("增加文章")
-    public ResultBean AddArticle(@ApiParam("ArticleBean 文章类") @RequestBody ArticleBean articleBean) throws SystemException {
+    public ResultBean AddArticle(@ApiParam("ArticleBean 文章类") @RequestBody Article articleBean) throws SystemException {
         boolean result = myService.AddArticle(articleBean);
         if (result) {
             return new ResultBean(true, Code.SAVE_OK);
@@ -42,7 +46,7 @@ public class MyController {
      */
     @DeleteMapping("/Article")
     @ApiOperation("删除文章")
-    public ResultBean DeleteArticle(@ApiParam("ArticleBean 文章类") @RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
+    public ResultBean DeleteArticle(@ApiParam("ArticleBean 文章类") @RequestBody Article articleBean) throws SystemException, BusinessException {
         ArticleChange.FrontChangeBack(articleBean);
         boolean result = myService.DeleteArticle(articleBean);
         if (result) {
@@ -57,7 +61,7 @@ public class MyController {
      */
     @PutMapping("/Article")
     @ApiOperation("更改文章")
-    public ResultBean UpdateArticle(@ApiParam("ArticleBean 文章类") @RequestBody ArticleBean articleBean) throws SystemException, BusinessException {
+    public ResultBean UpdateArticle(@ApiParam("ArticleBean 文章类") @RequestBody Article articleBean) throws SystemException, BusinessException {
         ArticleChange.FrontChangeBack(articleBean);
         boolean result = myService.UpdateArticle(articleBean);
         if (result) {
@@ -72,7 +76,7 @@ public class MyController {
      */
     @PostMapping("")
     @ApiOperation("查询管理账号密码")
-    public ResultBean GetRootManager(@ApiParam("User 用户类") @RequestBody User user) {
+    public ResultBean GetRootManager(@ApiParam("User 用户类") @RequestBody UserBean user) {
 
         boolean result = myService.SelectRoot(user.getUsername(), user.getPassword());
         if (result) {
@@ -87,7 +91,7 @@ public class MyController {
      */
     @PutMapping("/About")
     @ApiOperation("更改个人信息")
-    public ResultBean UpdateAboutMe(@ApiParam("AboutMe aboutMe类") @RequestBody AboutMe aboutMe){
+    public ResultBean UpdateAboutMe(@ApiParam("AboutMe aboutMe类") @RequestBody AboutMeBean aboutMe){
         boolean result = myService.UpdateAboutMe(aboutMe);
         if (result){
             return new ResultBean(true,Code.UPDATE_OK);

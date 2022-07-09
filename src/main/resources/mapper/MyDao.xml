@@ -8,7 +8,7 @@
 
     <!--增加文章与标签映射-->
     <insert id="addTags" parameterType="java.util.List" useGeneratedKeys="true">
-        insert into ArtMapTag(id, a_id, t_id)
+        insert into artmaptag(id, a_id, t_id)
         VALUES
         <foreach collection="tags" item="tag" separator=",">
             (null,
@@ -19,7 +19,7 @@
 
     <!--改-->
     <update id="updateArticle">
-        update Article
+        update article
         <set>
             <if test="date!=null and date!=''">
                 date=#{date},
@@ -39,7 +39,7 @@
 
     <!--更改个人信息-->
     <update id="updateAboutMe">
-        update AboutMe
+        update aboutme
         <set>
             <if test="author!=null and author!=''">
                 author=#{author},

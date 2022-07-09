@@ -17,9 +17,9 @@ public class ExceptionAdvice {
     private void servicePt() {
     }
 
-    @Pointcut("execution(* com.augenstern.dao.*.*(..))")
-    private void daoPt() {
-    }
+//    @Pointcut("execution(* com.augenstern.dao.*.*(..))")
+//    private void daoPt() {
+//    }
 
     @Pointcut("execution(* com.augenstern.controller.*.*(..))")
     private void controllerPt() {
@@ -27,8 +27,6 @@ public class ExceptionAdvice {
 
     /**
      * Service异常处理
-     * @param pjp
-     * @throws Throwable
      */
     @Around("servicePt()")
     public Object serviceException(ProceedingJoinPoint pjp) throws Throwable {
@@ -37,8 +35,6 @@ public class ExceptionAdvice {
 
     /**
      * Dao异常处理
-     * @param pjp
-     * @throws Throwable
      */
     @Around("controllerPt()")
     public Object controllerException(ProceedingJoinPoint pjp) throws Throwable {

@@ -2,10 +2,10 @@ package com.augenstern.service.impl;
 
 import com.augenstern.dao.ArticleDao;
 import com.augenstern.dao.MyDao;
-import com.augenstern.domain.AboutMe;
-import com.augenstern.domain.ArticleBean;
-import com.augenstern.domain.Code;
-import com.augenstern.domain.User;
+import com.augenstern.entity.Code;
+import com.augenstern.entity.dao.AboutMeBean;
+import com.augenstern.entity.dao.UserBean;
+import com.augenstern.entity.server.Article;
 import com.augenstern.exception.SystemException;
 import com.augenstern.service.MyService;
 import com.augenstern.service.Util.TagUtil;
@@ -23,10 +23,10 @@ public class MyServiceImpl implements MyService {
     private ArticleDao articleDao;
 
     @Override
-    public boolean AddArticle(ArticleBean articleBean) throws SystemException {
-        myDao.addArticle(articleBean);
-        int id = articleBean.getId();
-        List<String> tags = articleBean.getTags();
+    public boolean AddArticle(Article article) throws SystemException {
+        myDao.addArticle(article);
+        int id = article.getId();
+        List<String> tags = article.getTags();
         if (tags != null) {
             boolean result = TagUtil.ChangeTagsId(tags);
             if (result) {
@@ -41,48 +41,48 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public boolean DeleteArticle(ArticleBean articleBean) {
-        int id = articleBean.getId();
+    public boolean DeleteArticle(Article article) {
+        int id = article.getId();
         myDao.deleteTagsByArticleId(id);
         myDao.deleteArticle(id);
         return true;
     }
 
     @Override
-    public boolean UpdateArticle(ArticleBean articleBean) {
-        ArticleBean articleBeanSelect = articleDao.selectArticleById(articleBean.getId());
-        if (articleBeanSelect.getDate().equals(articleBean.getDate())) articleBean.setDate(null);
-        if (articleBeanSelect.getTitle().equals(articleBean.getTitle())) articleBean.setTitle(null);
-        if (articleBeanSelect.getAuthor().equals(articleBean.getAuthor())) articleBean.setAuthor(null);
-        if (articleBeanSelect.getMessages().equals(articleBean.getMessages())) articleBean.setMessages(null);
-        if (articleBean.getTitle() != null || articleBean.getMessages() != null ||
-                articleBean.getAuthor() != null || articleBean.getDate() != null) {
-            myDao.updateArticle(articleBean);
+    public boolean UpdateArticle(Article article) {
+        Article articleBeanSelect = articleDao.selectArticleById(article.getId());
+        if (articleBeanSelect.getDate().equals(article.getDate())) article.setDate(null);
+        if (articleBeanSelect.getTitle().equals(article.getTitle())) article.setTitle(null);
+        if (articleBeanSelect.getAuthor().equals(article.getAuthor())) article.setAuthor(null);
+        if (articleBeanSelect.getMessages().equals(article.getMessages())) article.setMessages(null);
+        if (article.getTitle() != null || article.getMessages() != null ||
+                article.getAuthor() != null || article.getDate() != null) {
+            myDao.updateArticle(article);
         }
         //检查标签更改
         boolean flag = false;
-        for (String tag : articleBean.getTags()) {
+        for (String tag : article.getTags()) {
             if (!articleBeanSelect.getTags().contains(tag)) {
                 flag = true;
                 break;
             }
         }
         for (String tag : articleBeanSelect.getTags()) {
-            if (!articleBean.getTags().contains(tag)) {
+            if (!article.getTags().contains(tag)) {
                 flag = true;
                 break;
             }
         }
         //判空
-        if (articleBean.getTags().isEmpty()) {
-            myDao.deleteTagsByArticleId(articleBean.getId());
+        if (article.getTags().isEmpty()) {
+            myDao.deleteTagsByArticleId(article.getId());
         } else {
             //改标签
             if (flag) {
-                boolean result = TagUtil.ChangeTagsId(articleBean.getTags());
+                boolean result = TagUtil.ChangeTagsId(article.getTags());
                 if (result) {
-                    myDao.deleteTagsByArticleId(articleBean.getId());
-                    myDao.addTags(articleBean.getId(), articleBean.getTags());
+                    myDao.deleteTagsByArticleId(article.getId());
+                    myDao.addTags(article.getId(), article.getTags());
                     return true;
                 } else {
                     return false;
@@ -94,8 +94,8 @@ public class MyServiceImpl implements MyService {
 
     @Override
     public boolean SelectRoot(String username,String password) {
-        List<User> roots =  myDao.selectRoot();
-        for (User root : roots) {
+        List<UserBean> roots =  myDao.selectRoot();
+        for (UserBean root : roots) {
             if (root.getUsername().equals(username) && root.getPassword().equals(password)) {
                 return true;
             }
@@ -104,8 +104,8 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public boolean UpdateAboutMe(AboutMe aboutMe) {
-        myDao.updateAboutMe(aboutMe);
+    public boolean UpdateAboutMe(AboutMeBean aboutMeBean) {
+        myDao.updateAboutMe(aboutMeBean);
         return true;
     }
 }

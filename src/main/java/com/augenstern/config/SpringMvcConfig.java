@@ -31,10 +31,13 @@ public class SpringMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //图片资源+
+        //图片资源
         registry.addResourceHandler("/image/**")
                 .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+"./"+
                         "image" + System.getProperty("file.separator"));
+
+        //开发文档
+        registry.addResourceHandler("/doc.html").addResourceLocations("/doc.html");
 
         //前端资源
         registry.addResourceHandler("/**").addResourceLocations(

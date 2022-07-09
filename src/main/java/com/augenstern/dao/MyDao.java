@@ -1,8 +1,8 @@
 package com.augenstern.dao;
 
-import com.augenstern.domain.AboutMe;
-import com.augenstern.domain.ArticleBean;
-import com.augenstern.domain.User;
+import com.augenstern.entity.dao.AboutMeBean;
+import com.augenstern.entity.dao.UserBean;
+import com.augenstern.entity.server.Article;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -11,6 +11,7 @@ import java.util.List;
  * 操作数据库层
  */
 @CacheNamespaceRef(name = "com.augenstern.dao.Cache")
+@Mapper
 public interface MyDao {
 
     /**
@@ -21,37 +22,37 @@ public interface MyDao {
     /**
      * id删除标签
      */
-    @Delete("delete from ArtMapTag where a_id=#{id}")
+    @Delete("delete from artmaptag where a_id=#{id}")
     void deleteTagsByArticleId(int id);
 
     /**
      * 增
      */
-    @Insert("insert into Article(date, title, author, messages) " +
+    @Insert("insert into article(date, title, author, messages) " +
             "values (#{date},#{title},#{author},#{messages})")
     @Options(useGeneratedKeys = true,keyProperty = "id")
-    void addArticle(ArticleBean articleBean);
+    void addArticle(Article article);
 
     /**
      * 删
      */
-    @Delete("delete from Article where id=#{id}")
+    @Delete("delete from article where id=#{id}")
     void deleteArticle(int id);
 
     /**
      * 改
      */
-    void updateArticle(ArticleBean articleBean);
+    void updateArticle(Article articleBean);
 
     /**
      * 查询管理账号密码
      */
-    @Select("select * from User")
+    @Select("select * from user")
     @Options(useCache = false)
-    List<User> selectRoot();
+    List<UserBean> selectRoot();
 
     /**
      * 更改个人信息
      */
-    void updateAboutMe(AboutMe aboutMe);
+    void updateAboutMe(AboutMeBean aboutMe);
 }

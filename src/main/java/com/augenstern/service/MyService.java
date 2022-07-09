@@ -1,7 +1,7 @@
 package com.augenstern.service;
 
-import com.augenstern.domain.AboutMe;
-import com.augenstern.domain.ArticleBean;
+import com.augenstern.entity.dao.AboutMeBean;
+import com.augenstern.entity.server.Article;
 import com.augenstern.exception.SystemException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +16,14 @@ public interface MyService {
      * @return true为成功  false为异常
      */
     @Transactional(timeout = 5,rollbackFor = Exception.class)
-    boolean AddArticle(ArticleBean articleBean) throws SystemException;
+    boolean AddArticle(Article article) throws SystemException;
 
     /**
      * 删除文章
      * @return  ture为成功 false为异常
      */
     @Transactional(timeout = 5, rollbackFor = Exception.class)
-    boolean DeleteArticle(ArticleBean articleBean) throws SystemException;
+    boolean DeleteArticle(Article article) throws SystemException;
 
     /**
      * 修改文章
@@ -31,7 +31,7 @@ public interface MyService {
      * @return true为成功 false为异常
      */
     @Transactional(timeout = 5, rollbackFor = Exception.class)
-    boolean UpdateArticle(ArticleBean articleBean) throws SystemException;
+    boolean UpdateArticle(Article article) throws SystemException;
 
     /**
      * 查询root账号
@@ -45,5 +45,5 @@ public interface MyService {
      * @return true为成功 false失败
      */
     @Transactional(timeout = 5, rollbackFor = Exception.class)
-    boolean UpdateAboutMe(AboutMe aboutMe);
+    boolean UpdateAboutMe(AboutMeBean aboutMeBean);
 }

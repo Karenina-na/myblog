@@ -1,8 +1,8 @@
 package com.augenstern.controller;
 
-import com.augenstern.domain.Code;
-import com.augenstern.domain.FileUploadResultBean;
-import com.augenstern.domain.ResultBean;
+import com.augenstern.entity.Code;
+import com.augenstern.entity.controller.ImgUploadResult;
+import com.augenstern.entity.controller.ResultBean;
 import com.augenstern.exception.BusinessException;
 import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
@@ -36,13 +36,13 @@ public class ProjectExceptionAdvice {
     }
 
     /**
-     * 文件上传异常
+     * 图片上传异常
      */
     @ExceptionHandler(FileUploadException.class)
-    public FileUploadResultBean doException(FileUploadException ex) {
+    public ImgUploadResult doException(FileUploadException ex) {
         LOGGER.warn(request.getRemoteAddr() + " " + request.getRequestURL());
         LOGGER.warn("文件上传异常--" + ex.getMessage());
-        return new FileUploadResultBean(0, ex.getMessage());
+        return new ImgUploadResult(0, ex.getMessage());
     }
 
     /**

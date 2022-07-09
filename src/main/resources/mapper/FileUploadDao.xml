@@ -7,7 +7,7 @@
     <cache-ref namespace="com.augenstern.dao.Cache"/>
 
     <!--资源目录对象封装-->
-    <resultMap id="Source" type="com.augenstern.domain.SourceBean">
+    <resultMap id="Source" type="com.augenstern.entity.dao.SourceBean">
         <result column="type" property="type"/>
         <result column="name" property="name"/>
         <result column="date" property="date"/>

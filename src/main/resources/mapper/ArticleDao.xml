@@ -7,7 +7,7 @@
     <cache-ref namespace="com.augenstern.dao.Cache"/>
 
     <!--子查询tags对象封装-->
-    <resultMap id="tagFind" type="com.augenstern.domain.ArticleBean">
+    <resultMap id="tagFind" type="com.augenstern.entity.server.Article">
         <result column="id" property="id"/>
         <result column="date" property="date"/>
         <result column="author" property="author"/>
@@ -18,8 +18,7 @@
     </resultMap>
 
     <select id="select_tags_by_ArtMapTag" resultType="java.lang.String">
-        select Tag.tag from Tag,ArtMapTag
-        where ArtMapTag.t_id=Tag.id and ArtMapTag.a_id=#{id}
-        group by Tag.tag
+        select tag.tag from tag,artmaptag
+        where artmaptag.t_id=tag.id and artmaptag.a_id=#{id}
     </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.augenstern.domain;
+package com.augenstern.entity;
 
 
 import io.swagger.annotations.ApiModel;

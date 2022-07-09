@@ -1,0 +1,3 @@
+controller  数据接收与包装层
+server  数据处理层
+dao     数据库结构映射

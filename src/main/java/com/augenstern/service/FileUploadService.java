@@ -1,14 +1,12 @@
 package com.augenstern.service;
 
-import com.augenstern.domain.ServerSourceResultBean;
-import com.augenstern.domain.SourceBean;
+import com.augenstern.entity.server.SourcesResult;
 import com.augenstern.exception.FileUploadException;
 import com.augenstern.exception.SystemException;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * 文件上传业务层
@@ -25,7 +23,7 @@ public interface FileUploadService {
      * 分页获取图片资源
      */
     @Transactional(timeout = 5,rollbackFor = Exception.class,readOnly = true)
-    ServerSourceResultBean SelectImg(int page);
+    SourcesResult SelectImg(int page);
 
     /**
      * 删除文件

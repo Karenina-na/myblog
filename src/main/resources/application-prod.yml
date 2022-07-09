@@ -8,17 +8,14 @@ server:
     key-store-password: 2167137570legacy
     keyStoreType: JKS
 
-  servlet:
-    context-path:
-
 spring:
   #数据库地址
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: 2167137570legacy
-    url: jdbc:mysql://127.0.0.1:3306/Myblog?useSSL=false&useServerPrepStmts=TRUE
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      username: root
+      password: 2167137570legacy
+      url: jdbc:mysql://127.0.0.1:3306/Myblog?useSSL=false&useServerPrepStmts=TRUE
+      driver-class-name: com.mysql.cj.jdbc.Driver
 
 #转发端口
 http-port: 80
