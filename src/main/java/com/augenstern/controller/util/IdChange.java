@@ -24,7 +24,7 @@ public class IdChange {
             result.append(id);
             //填充随机数
             while (result.length()<8){
-                String temp=new String(String.valueOf(random.nextInt(9)+1));
+                String temp= String.valueOf(random.nextInt(9) + 1);
                 result.append(temp);
             }
             //长度

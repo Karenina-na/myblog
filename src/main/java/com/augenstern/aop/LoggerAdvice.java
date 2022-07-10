@@ -43,7 +43,7 @@ public class LoggerAdvice {
      */
     @Before("controllerPt()")
     public void controllerLogger() {
-        final Logger LOGGER = LoggerFactory.getLogger("Controller-");
+        Logger LOGGER = LoggerFactory.getLogger("Controller-");
         LOGGER.info(request.getRemoteAddr() + "-" + request.getRequestURI());
     }
 
@@ -57,7 +57,7 @@ public class LoggerAdvice {
         String Arg = message.get(1);
         String returnType = message.get(2);
 
-        final Logger LOGGER = LoggerFactory.getLogger(request.getRemoteAddr()
+        Logger LOGGER = LoggerFactory.getLogger(request.getRemoteAddr()
                 + "-Service-" + methodName);
         LOGGER.info("Args-" + Arg + " Return-" + (returnType));
     }
@@ -72,7 +72,7 @@ public class LoggerAdvice {
         String Arg = message.get(1);
         String returnType = message.get(2);
 
-        final Logger LOGGER = LoggerFactory.getLogger(request.getRemoteAddr()
+        Logger LOGGER = LoggerFactory.getLogger(request.getRemoteAddr()
                 + "-Dao-" + methodName);
         LOGGER.info("Args-" + Arg + " Return-" + (returnType));
     }

@@ -1,5 +1,8 @@
 package com.augenstern.service.impl;
 
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import com.augenstern.dao.ArticleDao;
 import com.augenstern.dao.MyDao;
 import com.augenstern.entity.Code;
@@ -21,6 +24,18 @@ public class RootServiceImpl implements RootService {
 
     @Resource
     private ArticleDao articleDao;
+
+    /**
+     * 文章缓存
+     */
+    @CreateCache(name = "articleCache-", cacheType = CacheType.REMOTE)
+    private Cache<Long, Article> articleCache;
+
+    /**
+     * 个人信息缓存
+     */
+    @CreateCache(name = "aboutMeCache", cacheType = CacheType.REMOTE)
+    private Cache<Long, AboutMeBean> aboutMeCache;
 
     @Override
     public boolean AddArticle(Article article) throws SystemException {
@@ -50,6 +65,7 @@ public class RootServiceImpl implements RootService {
 
     @Override
     public boolean UpdateArticle(Article article) {
+        articleCache.remove(Long.valueOf(article.getId()));
         Article articleBeanSelect = articleDao.selectArticleById(article.getId());
         if (articleBeanSelect.getDate().equals(article.getDate())) article.setDate(null);
         if (articleBeanSelect.getTitle().equals(article.getTitle())) article.setTitle(null);
@@ -105,6 +121,7 @@ public class RootServiceImpl implements RootService {
 
     @Override
     public boolean UpdateAboutMe(AboutMeBean aboutMeBean) {
+        aboutMeCache.remove(null);
         myDao.updateAboutMe(aboutMeBean);
         return true;
     }

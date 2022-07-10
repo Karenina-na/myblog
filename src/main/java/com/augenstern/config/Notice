@@ -1,6 +1,6 @@
 SpringMvcConfig     SpringMVC   配置
 
-MybatisConfig       MyBatis 配置
+MpConfig     MP 配置
 
 HttpsConfiguration  http转发为https
 

@@ -27,8 +27,8 @@ public class ArticleChange {
         }
     }
 
-    public static void BackChangeFront(ArticlesResult articlesBean) throws SystemException {
-        List<Article> articles = articlesBean.getArticles();
+    public static void BackChangeFront(ArticlesResult articlesResult) throws SystemException {
+        List<Article> articles = articlesResult.getArticles();
         for (Article article : articles) {
             int id = IdChange.BackToFront(article.getId());
             if (id!=-1){

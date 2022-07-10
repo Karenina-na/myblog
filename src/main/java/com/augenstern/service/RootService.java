@@ -23,7 +23,7 @@ public interface RootService {
      * @return  ture为成功 false为异常
      */
     @Transactional(timeout = 5, rollbackFor = Exception.class)
-    boolean DeleteArticle(Article article) throws SystemException;
+    boolean DeleteArticle(Article article);
 
     /**
      * 修改文章
@@ -31,7 +31,7 @@ public interface RootService {
      * @return true为成功 false为异常
      */
     @Transactional(timeout = 5, rollbackFor = Exception.class)
-    boolean UpdateArticle(Article article) throws SystemException;
+    boolean UpdateArticle(Article article);
 
     /**
      * 查询root账号

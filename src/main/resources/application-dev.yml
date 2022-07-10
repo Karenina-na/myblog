@@ -16,9 +16,29 @@ spring:
 #地址
 URL: http://localhost
 
-#mp日志
+#mp配置
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.www.augenstern.entity.dao.*
   mapper-locations: classpath:mapper/*.xml
+
+#缓存技术 jetCache
+jetcache:
+  statIntervalMinutes: 1  #每个一分钟显示统计数据
+  #本地方案
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson    #转key字符串
+      limit: 100  #最大数目
+
+  #远程方案
+  remote:
+    default:    #默认配置
+      keyConvertor: fastjson
+      type: redis       # 配置redis
+      host: 192.168.71.128
+      port: 6379
+      poolConfig:
+        maxTotal: 50    #最大连接数

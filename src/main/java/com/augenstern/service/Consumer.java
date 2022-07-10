@@ -1,5 +1,8 @@
 package com.augenstern.service;
 
+
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.Cached;
 import com.augenstern.entity.dao.AboutMeBean;
 import com.augenstern.entity.server.Article;
 import com.augenstern.entity.server.ArticlesResult;

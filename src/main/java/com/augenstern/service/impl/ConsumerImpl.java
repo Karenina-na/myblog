@@ -1,5 +1,8 @@
 package com.augenstern.service.impl;
 
+import com.alicp.jetcache.Cache;
+import com.alicp.jetcache.anno.CacheType;
+import com.alicp.jetcache.anno.CreateCache;
 import com.augenstern.dao.ArticleDao;
 import com.augenstern.entity.Code;
 import com.augenstern.entity.dao.AboutMeBean;
@@ -16,6 +19,18 @@ import java.util.List;
 
 @Service
 public class ConsumerImpl implements Consumer {
+
+    /**
+     * 文章缓存
+     */
+    @CreateCache(name = "articleCache-", expire = 3600, cacheType = CacheType.REMOTE)
+    private Cache<Long, Article> articleCache;
+
+    /**
+     * 个人信息缓存
+     */
+    @CreateCache(name = "aboutMeCache", expire = 3600, cacheType = CacheType.REMOTE)
+    private Cache<Long, AboutMeBean> aboutMeCache;
 
     @Resource
     private ArticleDao articleDao;
@@ -42,7 +57,12 @@ public class ConsumerImpl implements Consumer {
 
     @Override
     public Article SelectArticleById(int id) {
-        return articleDao.selectArticleById(id);
+        Article article = articleCache.get((long) id);
+        if (article == null) {
+            article = articleDao.selectArticleById(id);
+            articleCache.put(Long.valueOf(article.getId()),article);
+        }
+        return article;
     }
 
     @Override
@@ -55,6 +75,10 @@ public class ConsumerImpl implements Consumer {
 
     @Override
     public AboutMeBean SelectAboutMe() {
-        return articleDao.selectAboutMe();
+        AboutMeBean aboutMe = aboutMeCache.get(null);
+        if (aboutMe == null) {
+            aboutMe = articleDao.selectAboutMe();
+        }
+        return aboutMe;
     }
 }
