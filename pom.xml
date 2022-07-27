@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.11</version>
+            <version>1.2.9</version>
         </dependency>
         <!--jetCache缓存技术包(代替springbootCache)-->
         <!-- https://mvnrepository.com/artifact/com.alicp.jetcache/jetcache-starter-redis -->
@@ -111,7 +111,6 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

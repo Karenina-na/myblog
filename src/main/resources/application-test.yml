@@ -1,37 +1,31 @@
-#生产环境
+#测试环境
 server:
-  #ssl
-  port: 443
-  ssl:
-    enabled: true
-    key-store: classpath:ssl/wzxaugenstern.online.jks
-    key-store-password: 2167137570legacy
-    keyStoreType: JKS
+  port: 8080
 
 spring:
   config:
-    name: prod
+    name: test
   #数据库地址
   datasource:
     druid:
       username: root
       password: 2167137570legacy
-      url: jdbc:mysql://127.0.0.1:3306/Myblog?useSSL=false&useServerPrepStmts=TRUE
+      url: jdbc:mysql://localhost/Myblog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
       driver-class-name: com.mysql.cj.jdbc.Driver
 
-#转发端口
-http-port: 80
-
 #地址
-URL: https://www.wzxaugenstern.online
+URL: http://10.26.186.247:8080
 
 #mp配置
 mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.www.augenstern.entity.dao.*
   mapper-locations: classpath:mapper/*.xml
 
 #缓存技术 jetCache
 jetcache:
+  statIntervalMinutes: 1  #每个一分钟显示统计数据
   #本地方案
   local:
     default:
@@ -44,7 +38,7 @@ jetcache:
     default:    #默认配置
       keyConvertor: fastjson
       type: redis       # 配置redis
-      host: 127.0.0.1
+      host: localhost
       port: 6379
       poolConfig:
         maxTotal: 50    #最大连接数
