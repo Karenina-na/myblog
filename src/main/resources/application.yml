@@ -1,12 +1,12 @@
 spring:
   #环境
   profiles:
-    active: dev
-#    active: prod
+#    active: dev
+    active: prod
 #    active: test
 
   application:
-    name: Myblog
+    name: CycleDR的小站
     
   mvc:
     path match:
